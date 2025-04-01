@@ -1,0 +1,161 @@
+﻿@model LoginRegister.DTO.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+</style>
+
+<body style="background-color:#f5f1f5">
+    <div class="container-fluid text-center m-0 P-0">
+        <div class="bg-image"
+             style="background-image: url('/images/ai.png'); height: 100vh; background-size: cover; background-position: center;">
+            <div class="container pt-5 text-center">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <div class="card glass-card text-white rounded">
+                            <div class="card-header text-center fs-3">Create an account</div>
+
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="bg-warning outline-danger rounded text-center p-1">
+                                    <h5>@ViewBag.Message</h5>
+                                </div>
+                            }
+
+                            <div asp-validation-summary="ModelOnly" class="text-warning"></div>
+                            <div class="card-body">
+
+                                <form asp-action="Register" method="post">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="FirstName"></label>
+                                        <input asp-for="FirstName" class="form-control" required />
+                                        <span asp-validation-for="FirstName" class="text-warning"></span>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="LastName"></label>
+                                        <input asp-for="LastName" class="form-control" required />
+                                        <span asp-validation-for="LastName" class="text-warning"></span>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="PhoneNumber"></label>
+                                        <input asp-for="PhoneNumber" class="form-control"
+                                               pattern="^(013|014|015|016|017|018|019)[0-9]{8}$"
+                                               title="Phone number must be a valid Bangladeshi number"
+                                               required />
+
+                                        <span asp-validation-for="PhoneNumber" class="text-warning"></span>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Gender"></label><br />
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" asp-for="Gender" value="Male" required />
+                                            <label class="form-check-label">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" asp-for="Gender" value="Female" required />
+                                            <label class="form-check-label">Female</label>
+                                        </div>
+                                        <span asp-validation-for="Gender" class="text-warning d-block"></span>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Email"></label>
+                                        <input asp-for="Email" class="form-control" required />
+                                        <span asp-validation-for="Email" class="text-warning"></span>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" type="password" class="form-control" required />
+                                        <span asp-validation-for="Password" class="text-warning"></span>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label>Register as:</label>
+                                        <select asp-for="Role" class="form-control" required>
+                                            <option disabled selected value="">Select Role</option>
+                                            <option value="JobSeeker">Job Seeker</option>
+                                            <option value="Employer">Employer</option>
+                                        </select>
+                                        <span asp-validation-for="Role" class="text-warning"></span>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-outline-warning w-100">Register</button>
+                                </form>
+
+
+
+                                <div class="card-footer text-center text-white">
+                                    Do you have an account? Go to
+                                    <a asp-action="Login" class="btn text-decoration-none btn-outline-success rounded p-1 m-1">
+                                        Login Page
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+
+
+
+@*
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" required />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" required />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Register as:</label>
+        <select asp-for="Role" class="form-control" required>
+            <option value="JobSeeker">Job Seeker</option>
+            <option value="Employer">Employer</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+<p>Already have an account? <a asp-action="Login">Login</a></p>
+*@

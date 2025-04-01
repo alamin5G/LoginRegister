@@ -1,0 +1,113 @@
+﻿@model LoginRegister.DTO.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1); /* Light white/gray tint */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); /* Safari support */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+</style>
+
+
+<!-- Optional background and styling -->
+<body style="background-color:#f5f1f5">
+    <div class="container-fluid m-0 p-0">
+        <div class="bg-image"
+             style="background-image: url('/images/squirrel.jpg'); height: 100vh; background-size: cover; background-position: center;">
+         
+            <!-- login form start -->
+            <div class="container pt-5 text-center">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        @*<div class="card bg-transparent text-white rounded"> *@
+                        <div class="card glass-card text-white rounded">
+                            <div class="card-header text-center fs-3">Login</div>
+
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="bg-warning outline-danger rounded text-center p-1">
+                                    <h5>@ViewBag.Message</h5>
+                                </div>
+                            }
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <form asp-action="Login" method="post" novalidate>
+
+                                        <div class="mb-3">
+                                            <label for="Email" class="form-label">Email address</label>
+                                            <input asp-for="Email" class="form-control" placeholder="Enter your registered email" required
+                                                   oninvalid="this.setCustomValidity('Please enter your email')"
+                                                   oninput="this.setCustomValidity('')" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="Password" class="form-label">Password</label>
+                                            <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" required
+                                                   oninvalid="this.setCustomValidity('Please enter your password')"
+                                                   oninput="this.setCustomValidity('')" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="termsCheckbox" name="termsAccepted" required
+                                                   oninvalid="this.setCustomValidity('You must agree to the terms.')"
+                                                   oninput="this.setCustomValidity('')" />
+                                            <label class="form-check-label text-black text-start" for="termsCheckbox">
+                                                Agreed on Terms and Conditions.
+                                            </label>
+                                        </div>
+
+
+                                    <button type="submit" class="btn btn-outline-warning btn-success mb-2 text-center d-grid gap-2 col-6 mx-auto">
+                                        Login
+                                    </button>
+                                </form>
+
+                                <div class="card-footer text-center text-white">
+                                    Don't you have an account? Go to
+                                    <a asp-action="Register" class="btn btn-outline-danger text-white text-decoration-none p-1 m-1 rounded">
+                                        Register Page
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- login form end -->
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@*
+<h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<p>Don't have an account? <a asp-action="Register">Register here</a></p>
+*@
